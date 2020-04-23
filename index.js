@@ -1,5 +1,5 @@
 const middy = require('middy');
-const { validateRequest } = require('./middlewares/validate-schema');
+const { validateSchema } = require('./middlewares/validate-schema');
 const { config } = require('./middlewares/config-setup');
 
 
@@ -16,16 +16,19 @@ const handler = middy(async (event, context) => {
   }
 
 
-  // Ejemplo de respuesta
-  return handler.config.response(200, 'ok', 'Se ha creado una instancias de ec2 correctamente');
+  // Ejemplo de respuesta, se envia primero al middleware
+  handler.response = handler.config.response(200, 'ok', 'Se ha creado una instancias de ec2 correctamente');
+  
+  // Se retorna despues que la valido el middleware
+  return handler.response;
 });
 
 // Mandamos llamar a los middlewares empezando por el de la configuración
 
-handler.use(config()).use(validateRequest());
+handler.use(validateSchema()).use(config());
 
 // Podríamos llamar mas si quisieramos
-// handler.use(validateRequest(Config)).use(OtroMiddleware).use(OtroMiddleware)
+// handler.use(validateSchema(Config)).use(OtroMiddleware).use(OtroMiddleware)
 
 
 

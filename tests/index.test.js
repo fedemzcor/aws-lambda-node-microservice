@@ -15,8 +15,10 @@ describe('index.js', () => {
       .event(event)
       .expectResult((result, additional) => {
         expect(result.code).toEqual('ok');
+        expect(result.httpCode).toEqual(200);
       });
   });
+
 
   test('Probamos un nombre de usuario mal escrito', () => {
     event = {
