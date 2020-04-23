@@ -29,19 +29,19 @@ module.exports.validateSchema = () => ({
         .max(521)
         .required(),
       code: joi.string()
-      .pattern(new RegExp('^[a-zA-Z0-9_]{2,20}$')),
+        .pattern(new RegExp('^[a-zA-Z0-9_]{2,20}$')),
       description: joi.string()
-      .min(10)
-      .max(100)
-      .required(),
+        .min(10)
+        .max(100)
+        .required(),
     });
 
     const { error } = schema.validate(handler.response);
-   
+
     if (typeof error === 'object') {
       return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
     }
-    return next()
+    return next();
   },
 
 
