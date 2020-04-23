@@ -13,6 +13,7 @@
     "@hapi/joi": "^17.1.1",
     "dotenv": "^8.2.0",
     "joi": "^14.3.1",
+    "log4js": "^6.2.1",
     "middy": "^0.36.0"
   },
   "devDependencies": {

@@ -11,6 +11,7 @@ const { config } = require('./middlewares/config-setup');
 const handler = middy(async (event, context) => {
 
   // Toda tu logica aquí y luego retornamos una respuesta
+  // Puedes crear otra carpeta en la raíz llamada controllers
   function callSomeController() {
 
   }
