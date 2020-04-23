@@ -5,6 +5,8 @@ const aws = require('aws-sdk'); //eslint-disable-line
 const { response } = require('../util/common');
 
 
+// Si el ambiente es local, se van a usar las variables del archivo .env
+
 if (process.env.ENV === 'local') {
     require('dotenv').config(); //eslint-disable-line
 
