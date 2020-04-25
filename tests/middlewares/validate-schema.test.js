@@ -36,7 +36,7 @@ describe('middlewares/validate-schema.js', () =>{
 
     const before = re.before(handler,next);
 
-    expect(before.code).toEqual('err')
+    expect(before.code).toEqual('err_schema')
   });
 
   test("Debe retornar el resultado de la función next al ingresar un username correcto", async () =>{

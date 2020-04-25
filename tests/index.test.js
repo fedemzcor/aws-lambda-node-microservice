@@ -1,7 +1,11 @@
 const lambdaTester = require('lambda-tester');
 const { handler } = require('../index');
 
-// Emulamos las variables de lambda (a esto le llaman mocking :P)
+/* 
+  Tenemos que emular las variables de lambda y 
+  otras dependencias (a esto le llaman mocking :P)
+
+*/
 let event = null;
 
 
@@ -28,7 +32,7 @@ describe('index.js', () => {
     return lambdaTester(handler)
       .event(event)
       .expectResult((result, additional) => {
-        expect(result.code).toEqual('err');
+        expect(result.code).toEqual('err_schema');
       });
   });
 });

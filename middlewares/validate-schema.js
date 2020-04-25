@@ -16,7 +16,8 @@ module.exports.validateSchema = () => ({
     const { error } = schema.validate(handler.event);
 
     if (typeof error === 'object') {
-      return handler.callback(null, handler.config.response(400, 'err', error.message));
+
+      return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
     }
     return next();
   },
@@ -34,6 +35,7 @@ module.exports.validateSchema = () => ({
         .min(10)
         .max(100)
         .required(),
+      data: joi.optional()
     });
 
     const { error } = schema.validate(handler.response);

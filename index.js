@@ -24,7 +24,7 @@ const handler = middy(async (event, context) => {
   return handler.response;
 });
 
-// Mandamos llamar a los middlewares empezando por el de la configuración
+// Mandamos llamar a los middlewares
 
 handler.use(validateSchema()).use(config());
 
