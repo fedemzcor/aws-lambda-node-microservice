@@ -18,8 +18,8 @@ describe('index.js', () => {
     return lambdaTester(handler)
       .event(event)
       .expectResult((result, additional) => {
-        expect(result.code).toEqual('ok');
-        expect(result.httpCode).toEqual(200);
+        expect(result.body.code).toEqual('ok');
+        expect(result.statusCode).toEqual(200);
       });
   });
 
@@ -32,7 +32,7 @@ describe('index.js', () => {
     return lambdaTester(handler)
       .event(event)
       .expectResult((result, additional) => {
-        expect(result.code).toEqual('err_schema');
+        expect(result.body.code).toEqual('err_schema');
       });
   });
 });

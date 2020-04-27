@@ -10,6 +10,6 @@ describe('util/common.js',  () =>{
 
   test("Debe retornar 'ok'", () =>{
     const re = response(200,'ok','probando');
-    expect(re.code).toEqual('ok')
+    expect(re.body.code).toEqual('ok')
   })
 });

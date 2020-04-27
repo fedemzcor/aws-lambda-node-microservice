@@ -36,7 +36,7 @@ describe('middlewares/validate-schema.js', () =>{
 
     const before = re.before(handler,next);
 
-    expect(before.code).toEqual('err_schema')
+    expect(before.body.code).toEqual('err_schema')
   });
 
   test("Debe retornar el resultado de la función next al ingresar un username correcto", async () =>{
@@ -61,12 +61,14 @@ describe('middlewares/validate-schema.js', () =>{
     const next = jest.fn(data => true);
   
     handler.callback = ((nullParam, data) => { return data; });
-    handler.response = { httpCode: 700, Code: 'ok' };
+    handler.response = {}
+    handler.response.statusCode = 700 
+    handler.response.body = { Code: 'ok' };
     handler.config = await config();
 
     const after = re.after(handler,next);
 
-    expect(after.code).toEqual('err_schema')
+    expect(after.body.code).toEqual('err_schema')
   });
 
   

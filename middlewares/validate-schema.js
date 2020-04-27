@@ -25,17 +25,18 @@ module.exports.validateSchema = () => ({
   after: (handler, next) => {
     // haz algo despues
     const schema = joi.object({
-      httpCode: joi.number().integer()
+      statusCode: joi.number().integer()
         .min(200)
         .max(521)
         .required(),
-      code: joi.string()
+      body:{ code: joi.string()
         .pattern(new RegExp('^[a-zA-Z0-9_]{2,20}$')),
       description: joi.string()
         .min(10)
         .max(100)
         .required(),
       data: joi.optional()
+      }
     });
 
     const { error } = schema.validate(handler.response);
