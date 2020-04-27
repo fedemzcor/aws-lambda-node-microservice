@@ -1,8 +1,8 @@
 module.exports.response = (statusCode, code, description, data = null) => ({
   statusCode,
-  body:{
+  body: {
     code,
     description,
-    data
-  }
+    data,
+  },
 });

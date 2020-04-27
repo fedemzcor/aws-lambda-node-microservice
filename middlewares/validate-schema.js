@@ -16,7 +16,6 @@ module.exports.validateSchema = () => ({
     const { error } = schema.validate(handler.event.body);
 
     if (typeof error === 'object') {
-
       return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
     }
     return next();
@@ -29,14 +28,15 @@ module.exports.validateSchema = () => ({
         .min(200)
         .max(521)
         .required(),
-      body:{ code: joi.string()
-        .pattern(new RegExp('^[a-zA-Z0-9_]{2,20}$')),
-      description: joi.string()
-        .min(10)
-        .max(100)
-        .required(),
-      data: joi.optional()
-      }
+      body: {
+        code: joi.string()
+          .pattern(new RegExp('^[a-zA-Z0-9_]{2,20}$')),
+        description: joi.string()
+          .min(10)
+          .max(100)
+          .required(),
+        data: joi.optional(),
+      },
     });
 
     const { error } = schema.validate(handler.response);

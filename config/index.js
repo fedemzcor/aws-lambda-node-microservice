@@ -26,12 +26,12 @@ const ssm = new aws.SSM(); // Instancia para usar el servicio de parameter store
 module.exports.config = async () => Object.freeze({ // Hacemos el objeto inmutable
   response,
   aws: {
-    ssm, /* 
+    ssm, /*
             Aquí guardamos una instancia de un servicio de AWS,
             podriamos enviar toda la clase aws pero mejor solo indicamos los servicios que
             realmente vamos a usar para no tener que cargarle toda la marrana.
         */
-        
+
   },
   // Otras configuración estaticas o dinamicas pueden ir aquí
 
