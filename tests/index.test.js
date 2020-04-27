@@ -6,13 +6,14 @@ const { handler } = require('../index');
   otras dependencias (a esto le llaman mocking :P)
 
 */
-let event = null;
 
 
 describe('index.js', () => {
   test('Probamos un nombre de usuario correcto', () => {
     event = {
-      username: 'fedemzcor',
+        body : {
+          username: 'fedemzcor',
+        }
     };
 
     return lambdaTester(handler)
@@ -26,7 +27,9 @@ describe('index.js', () => {
 
   test('Probamos un nombre de usuario mal escrito', () => {
     event = {
-      username: 'fedemzcor--*',
+      body : {
+        username: 'fedemzcor--*',
+      }
     };
 
     return lambdaTester(handler)

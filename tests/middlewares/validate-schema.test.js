@@ -28,9 +28,11 @@ describe('middlewares/validate-schema.js', () =>{
     const next = jest.fn();
   
     handler.callback = ((nullParam, data) => { return data; });
-    handler.event = {
-      username : 'fedemzcor-*'
-    }
+    handler.event = { 
+                    body : {
+                      username : 'fedemzcor-*'
+                    }
+                  };
     // Inyectamos la configuración
     handler.config = await config();
 

@@ -13,7 +13,7 @@ module.exports.validateSchema = () => ({
         .required(),
     });
 
-    const { error } = schema.validate(handler.event);
+    const { error } = schema.validate(handler.event.body);
 
     if (typeof error === 'object') {
 
