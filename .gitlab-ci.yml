@@ -1,0 +1,14 @@
+image: gospik/webapp:latest
+
+stages:
+
+- save_ons3
+
+
+
+build_lambda:
+  stage: save_ons3
+  script:
+    - aws s3 sync ./ s3://microservices/ms-001
+  only:
+    - master
