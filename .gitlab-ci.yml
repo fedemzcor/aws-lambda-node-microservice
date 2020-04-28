@@ -14,6 +14,6 @@ clean_function:
 build_lambda:
   stage: save_ons3
   script:
-    - aws s3 sync --delete ./ s3://microservices/ms-001/lambda
+    - aws s3 sync --delete ./ s3://gospik-microservices/ms-001/lambda
   only:
     - master
