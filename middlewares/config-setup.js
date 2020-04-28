@@ -7,11 +7,12 @@ module.exports.config = () => ({
     handler.config = await config();
     return next();
   },
-  onError: (handler, next) =>{
+  onError: (handler) =>{
 
     // haz algo si ocurrio un error
-    return next();
+    handler.config.logger.error(__filename, handler.error.message);
 
+    return handler.callback(null, handler.config.response(500, 'err_internal', handler.error.message));
 
   }
   

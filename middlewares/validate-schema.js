@@ -4,27 +4,27 @@ module.exports.validateSchema = () => ({
 
 
   before: (handler, next) => {
-    // haz algo al principio
-    // const schema = joi.object({
-    //   username: joi.string()
-    //     .alphanum()
-    //     .min(3)
-    //     .max(10)
-    //     .required(),
-    // });
+  // haz algo al principio
+  // const schema = joi.object({
+  //   username: joi.string()
+  //     .alphanum()
+  //     .min(3)
+  //     .max(10)
+  //     .required(),
+  // });
 
-    // const schema = joi.object({
-    //   // dialogId: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,30}$')).required(),
-    // }).optional();
+  const schema = joi.object({
+  // dialogId: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,30}$')).required(),
+  });
 
-    // const { error } = schema.validate(handler.event.body);
+  const { error } = schema.validate(handler.event.body);
 
-    // if (typeof error === 'object') {
-    //   return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
-    // }
-    return next();
+    if (typeof error === 'object') {
+      return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
+    }
+     return next();
+     
   },
-
   after: (handler, next) => {
     // haz algo despues
     const schema = joi.object({
@@ -56,9 +56,20 @@ module.exports.validateSchema = () => ({
   /* eslint-disable */ 
   onError: (handler, next) =>{
   // haz algo si ocurrio un error
+
+
+  /* 
+    Por lo general la raza suele poner un mensaje generico 
+    cuando ocurren errores en tiempo de ejecución para que el usuario final
+    no jusgue la confibilidad del sistema, y el error verdadero solo lo muestran
+    en los logs, sin embargo para ser mas transparentes
+    es mejor enviar el error real a ambas partes.
+
+  */
   handler.config.logger.error(__filename, handler.error.message);
+
   return handler.callback(null, handler.config.response(500, 'err_internal', handler.error.message));
-    // return next();
+
   }
   
 });

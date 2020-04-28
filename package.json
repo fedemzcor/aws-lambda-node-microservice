@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "unitTest": "ENV=local jest --verbose=true",
+    "unitTestOnFly":  "ENV=local jest ---watchAll --verbose=true",
     "lint": "prettier ./ && eslint --fix ./"
   },
   "author": "Federico Márquez Córdova",

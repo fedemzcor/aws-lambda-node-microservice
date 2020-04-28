@@ -10,12 +10,9 @@ const { handler } = require('../index');
 
 describe('index.js', () => {
   test('Probamos un body correcto', () => {
-    event = {
-       
-    };
 
     return lambdaTester(handler)
-      .event(event)
+      .event({})
       .expectResult((result, additional) => {
         expect(result.body.code).toEqual('ok');
         expect(result.statusCode).toEqual(200);
@@ -23,17 +20,12 @@ describe('index.js', () => {
   });
 
 
-  // test('Probamos un nombre de usuario mal escrito', () => {
-  //   event = {
-  //     body : {
-  //       username: 'fedemzcor--*',
-  //     }
-  //   };
+  test('Debe retornar un objeto', () => {
 
-  //   return lambdaTester(handler)
-  //     .event(event)
-  //     .expectResult((result, additional) => {
-  //       expect(result.body.code).toEqual('err_schema');
-  //     });
-  // });
+    return lambdaTester(handler)
+      .event({})
+      .expectResult((result, additional) => {
+        expect(typeof result.body.data).toEqual('object');
+      });
+  });
 });

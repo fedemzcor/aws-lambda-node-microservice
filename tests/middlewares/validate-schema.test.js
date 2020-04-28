@@ -23,39 +23,37 @@ describe('middlewares/validate-schema.js', () =>{
 
   
 
-  // test("Debe retornar error al ingresar un body incorrecto", async () =>{
-  //   const re = validateSchema()
-  //   const next = jest.fn();
+  test("Debe retornar error al ingresar contenido en el event", async () =>{
+    const re = validateSchema()
+    const next = jest.fn();
   
-  //   handler.callback = ((nullParam, data) => { return data; });
-  //   handler.event = { 
-  //                   body : {
-  //                     username : 'fedemzcor-*'
-  //                   }
-  //                 };
-  //   // Inyectamos la configuración
-  //   handler.config = await config();
+    handler.callback = ((nullParam, data) => { return data; });
+    handler.event = { 
+                    body : {
+                      username : 'fedemzcor-*'
+                    }
+                  };
+    // Inyectamos la configuración
+    handler.config = await config();
 
-  //   const before = re.before(handler,next);
+    const before = re.before(handler,next);
 
-  //   expect(before.body.code).toEqual('err_schema')
-  // });
+    expect(before.body.code).toEqual('err_schema')
+  });
 
-  // test("Debe retornar el resultado de la función next al ingresar un body correcto", async () =>{
-  //   const re = validateSchema()
-  //   const next = jest.fn(data => true);
+  test("Debe retornar el resultado de la función next al ingresar un body correcto", async () =>{
+    const re = validateSchema()
+    const next = jest.fn(data => true);
   
-  //   handler.callback = ((nullParam, data) => { return data; });
-  //   handler.event = {
-  //     // username : 'fedemzcor'
-  //   }
-  //   // Inyectamos la configuración
-  //   handler.config = await config();
+    handler.callback = ((nullParam, data) => { return data; });
+    handler.event = {};
+    // Inyectamos la configuración
+    handler.config = await config();
 
-  //   const after = re.after(handler,next);
+    const after = re.after(handler,next);
 
-  //   expect(after).toEqual(true)
-  // });
+    expect(after).toEqual(true)
+  });
 
   
   test("Debe retornar error del esquema al retornar", async () =>{

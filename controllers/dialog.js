@@ -10,19 +10,14 @@ module.exports.getDialogs = async (handler) => {
 
   return new Promise((resolve, reject) => {
     handler.config.aws.dynamoDB.scan(params, (err, data) => {
-
       if (err != null) return reject(handler.config.response(err.statusCode, 'err_controller', err.message));
-    
+
       return resolve(handler.config.response(200, 'ok', 'Esta es la lista de dialogos', data.Items));
-      
-   
-      });
+    });
   }).catch((result) => {
     handler.config.logger.error(__filename, result.body.description);
     return result;
   });
-
-
 };
 
 
@@ -43,5 +38,5 @@ module.exports.getDialogs = async (handler) => {
 //     Next();
 //     // return Req.CC.CR.SetResponseWithOk(Res, 200, 'ok', data.Items[0]);
 //   });
-  
+
 // };

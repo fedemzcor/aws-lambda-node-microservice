@@ -16,7 +16,9 @@ if (process.env.ENV === 'local') {
 }
 
 const logger = log4js.getLogger();
-logger.level = 'debug';
+logger.level = 'debug'; // configuramos el tipo de log por default
+
+
 // logger.debug("Some debug messages");
 const ssm = new aws.SSM(); // Instancia para usar el servicio de parameter store de AWS
 const dynamoDB = new aws.DynamoDB.DocumentClient({ apiVersion: '2012-10-08' });
