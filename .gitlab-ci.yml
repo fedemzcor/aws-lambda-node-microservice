@@ -8,12 +8,12 @@ stages:
 clean_function:
   stage: clear
   script:
-    - rm -rf ./node_modules
+    - rm -rf ./.git
 
 
 build_lambda:
   stage: save_ons3
   script:
-    - aws s3 sync --delete ./ s3://microservices/ms-001
+    - aws s3 sync --delete ./ s3://microservices/ms-001/lambda
   only:
     - master
