@@ -5,19 +5,23 @@ module.exports.validateSchema = () => ({
 
   before: (handler, next) => {
     // haz algo al principio
-    const schema = joi.object({
-      username: joi.string()
-        .alphanum()
-        .min(3)
-        .max(10)
-        .required(),
-    });
+    // const schema = joi.object({
+    //   username: joi.string()
+    //     .alphanum()
+    //     .min(3)
+    //     .max(10)
+    //     .required(),
+    // });
 
-    const { error } = schema.validate(handler.event.body);
+    // const schema = joi.object({
+    //   // dialogId: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,30}$')).required(),
+    // }).optional();
 
-    if (typeof error === 'object') {
-      return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
-    }
+    // const { error } = schema.validate(handler.event.body);
+
+    // if (typeof error === 'object') {
+    //   return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
+    // }
     return next();
   },
 
@@ -42,7 +46,8 @@ module.exports.validateSchema = () => ({
     const { error } = schema.validate(handler.response);
 
     if (typeof error === 'object') {
-      return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
+      handler.config.logger.error(__filename, error.message);
+      return handler.callback(null, handler.config.response(400, 'err_response_schema', error.message));
     }
     return next();
   },
@@ -51,8 +56,9 @@ module.exports.validateSchema = () => ({
   /* eslint-disable */ 
   onError: (handler, next) =>{
   // haz algo si ocurrio un error
-
-    return next();
+  handler.config.logger.error(__filename, handler.error.message);
+  return handler.callback(null, handler.config.response(500, 'err_internal', handler.error.message));
+    // return next();
   }
   
 });

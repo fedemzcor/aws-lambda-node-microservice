@@ -9,11 +9,9 @@ const { handler } = require('../index');
 
 
 describe('index.js', () => {
-  test('Probamos un nombre de usuario correcto', () => {
+  test('Probamos un body correcto', () => {
     event = {
-        body : {
-          username: 'fedemzcor',
-        }
+       
     };
 
     return lambdaTester(handler)
@@ -25,17 +23,17 @@ describe('index.js', () => {
   });
 
 
-  test('Probamos un nombre de usuario mal escrito', () => {
-    event = {
-      body : {
-        username: 'fedemzcor--*',
-      }
-    };
+  // test('Probamos un nombre de usuario mal escrito', () => {
+  //   event = {
+  //     body : {
+  //       username: 'fedemzcor--*',
+  //     }
+  //   };
 
-    return lambdaTester(handler)
-      .event(event)
-      .expectResult((result, additional) => {
-        expect(result.body.code).toEqual('err_schema');
-      });
-  });
+  //   return lambdaTester(handler)
+  //     .event(event)
+  //     .expectResult((result, additional) => {
+  //       expect(result.body.code).toEqual('err_schema');
+  //     });
+  // });
 });

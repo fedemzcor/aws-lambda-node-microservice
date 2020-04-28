@@ -1,7 +1,7 @@
 const middy = require('middy');
 const { validateSchema } = require('./middlewares/validate-schema');
 const { config } = require('./middlewares/config-setup');
-
+const { getDialogs } = require('./controllers/dialog')
 
 /* eslint-disable */ 
  
@@ -12,15 +12,14 @@ const handler = middy(async (event, context) => {
 
   // Toda tu logica aquí y luego retornamos una respuesta
   // Puedes crear otra carpeta en la raíz llamada controllers
-  function callSomeController() {
-
-  }
+  handler.response = await getDialogs(handler);
 
 
   // Ejemplo de respuesta, se envia primero al middleware
-  handler.response = handler.config.response(200, 'ok', 'Se ha creado una instancias de ec2 correctamente');
+  // handler.response = handler.config.response(200, 'ok', 'Se ha creado una instancias de ec2 correctamente');
   
   // Se retorna despues que la valido el middleware
+  handler.config.logger.info(__filename,JSON.stringify(handler.response.body.data));
   return handler.response;
 });
 
