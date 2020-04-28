@@ -1,14 +1,19 @@
-image: gospik/webapp:latest
+image: gospik/aws-microservice:latest
 
 stages:
 
+- clear
 - save_ons3
 
+clean_function:
+  stage: clear
+  script:
+    - rm -rf ./node_modules
 
 
 build_lambda:
   stage: save_ons3
   script:
-    - aws s3 sync ./ s3://microservices/ms-001
+    - aws s3 sync --delete ./ s3://microservices/ms-001
   only:
     - master
