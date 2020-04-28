@@ -16,7 +16,9 @@ module.exports.getDialogs = async (handler) => {
     });
   }).catch((result) => {
     handler.config.logger.error(__filename, result.body.description);
-    return result;
+    // return result;
+    // Retornamos un callback para que el error se lance directamente desde aquí y no pase al siguiente middleware
+    return handler.callback(null, handler.config.response(500, 'err_controller', result.body.description));
   });
 };
 

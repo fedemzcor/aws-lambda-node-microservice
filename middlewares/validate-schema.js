@@ -20,6 +20,7 @@ module.exports.validateSchema = () => ({
   const { error } = schema.validate(handler.event.body);
 
     if (typeof error === 'object') {
+      handler.config.logger.error(__filename, error.message);
       return handler.callback(null, handler.config.response(400, 'err_schema', error.message));
     }
      return next();
@@ -51,24 +52,21 @@ module.exports.validateSchema = () => ({
     }
     return next();
   },
+  onError: (handler) => {
+    // haz algo si ocurrio un error
 
 
-  /* eslint-disable */ 
-  onError: (handler, next) =>{
-  // haz algo si ocurrio un error
+    /* 
+      Por lo general la raza suele poner un mensaje generico 
+      cuando ocurren errores en tiempo de ejecución para que el usuario final
+      no jusgue la confibilidad del sistema, y el error verdadero solo lo muestran
+      en los logs, sin embargo para ser mas transparentes
+      es mejor enviar el error real a ambas partes.
 
+    */
+    handler.config.logger.error(__filename, handler.error.message);
 
-  /* 
-    Por lo general la raza suele poner un mensaje generico 
-    cuando ocurren errores en tiempo de ejecución para que el usuario final
-    no jusgue la confibilidad del sistema, y el error verdadero solo lo muestran
-    en los logs, sin embargo para ser mas transparentes
-    es mejor enviar el error real a ambas partes.
-
-  */
-  handler.config.logger.error(__filename, handler.error.message);
-
-  return handler.callback(null, handler.config.response(500, 'err_internal', handler.error.message));
+    return handler.callback(null, handler.config.response(500, 'err_internal', handler.error.message));
 
   }
   

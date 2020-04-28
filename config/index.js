@@ -1,7 +1,7 @@
 // en local instala esta dependencia como dev, en producción no la vas a ocupar
 const aws = require('aws-sdk'); //eslint-disable-line
 const log4js = require('log4js');
-const { response } = require('../util/common');
+const { response } = require('../util');
 
 
 // Si el ambiente es local, se van a usar las variables del archivo .env

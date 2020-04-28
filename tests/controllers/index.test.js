@@ -1,8 +1,8 @@
 const { handler } = require('../../index');
-const { getDialogs } = require('../../controllers/dialog')
+const { getDialogs } = require('../../controllers')
 const { config } = require('../../config');
 
-describe('controllers/dialog.js', () =>{
+describe('controllers/index.js', () =>{
   test("Debe retornar un objeto", async() =>{
     
     handler.callback = ((nullParam, data) => { return data; });

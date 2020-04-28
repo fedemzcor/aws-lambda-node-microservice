@@ -1,7 +1,7 @@
 const middy = require('middy');
 const { validateSchema } = require('./middlewares/validate-schema');
 const { config } = require('./middlewares/config-setup');
-const { getDialogs } = require('./controllers/dialog');
+const { getDialogs } = require('./controllers');
 
 /* eslint-disable */ 
  
@@ -25,7 +25,7 @@ const handler = middy(async (event, context) => {
 
 // Mandamos llamar a los middlewares
 
-handler.use(validateSchema()).use(config());
+handler.use(config()).use(validateSchema());
 
 // Podríamos llamar mas si quisieramos
 // handler.use(validateSchema(Config)).use(OtroMiddleware).use(OtroMiddleware)

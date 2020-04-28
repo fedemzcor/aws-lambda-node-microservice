@@ -1,6 +1,6 @@
 const { config } = require('../../config');
 const aws = require('aws-sdk'); 
-const { response } = require('../../util/common');
+const { response } = require('../../util');
 
 /* eslint-disable */ 
  
